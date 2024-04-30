@@ -31,7 +31,10 @@
         <p class="fs-1 fw-bold text-success">{{ finalScore }}</p>
         <p class="fs-2 fw-bold text-primary">Anagrams</p>
         <div>
-         <button class="btn btn-primary form-control" @click="config()">Play Again</button>
+         <button class="btn btn-primary form-control my-2" @click="config()">Play Again</button>
+    </div>
+    <div>
+        <button class="btn btn-secondary form-control" @click="goToPlay2LearnWebsite">Back to Start Screen</button>
     </div>
     </div>
    </main>
@@ -58,6 +61,7 @@ export default {
     },
     data: function () {
         return {
+        play2LearnWebsiteHtml: '',
         WordLength: '',
         startArray: '',
         startWord:  '',
@@ -117,6 +121,9 @@ computed: {
         },
     },
     methods: {
+      goToPlay2LearnWebsite() {
+        this.$router.push('Aanagram/anagram/src/components/Play2Learn Website-bootstrap.html');
+      },
         config() {
             this.screen = 'config';
         },
@@ -196,6 +203,16 @@ computed: {
       const domOl = document.getElementById('answer-list');
       domOl.appendChild(newLiNode);
     },
+    mounted() {
+      fetch('Aanagram/anagram/src/components/Play2Learn Website-bootstrap.html')
+      .then(response => response.text())
+      .then(html => {
+        this.play2LearnWebsiteHtml = html;
+      })
+      .catch(error => {
+        console.error('Error fetching Play2Learn Website-bootstrap.html:', error);
+      });
+    }
   },
 };      
 </script>
@@ -204,5 +221,8 @@ computed: {
 #main-container {
     margin: auto;
     width: 380px;
+}
+.my-2 {
+  margin-bottom: 1rem;
 }
 </style>
